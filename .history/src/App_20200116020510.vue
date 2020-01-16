@@ -4,7 +4,7 @@
     <Head :views="views" />
 
     <v-content>
-      <v-row class="px-6" style="height: 100%;">
+      <v-row style="height: 100%;">
         <v-col class="column" v-if="views[0].isShowing">
 
           <Notes v-on:updateNotes="updateNotes" />

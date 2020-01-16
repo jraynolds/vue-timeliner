@@ -4,32 +4,30 @@
     <Head :views="views" />
 
     <v-content>
-      <v-row class="px-6" style="height: 100%;">
-        <v-col class="column" v-if="views[0].isShowing">
+      <v-row style="height: 100%;">
+        <v-col class="column">
 
           <Notes v-on:updateNotes="updateNotes" />
 
         </v-col>
-        <v-col class="column" v-if="views[1].isShowing">
+        <v-col class="column">
 
-          <Timeline 
-            :story="story" 
-            :subjects="subjects" />
+          <Timeline :story="story" :subjects="subjects" />
 
         </v-col>
-        <v-col class="column" v-if="views[2].isShowing">
+        <v-col class="column">
 
-          <Subjects />
-
-        </v-col>
-        <v-col class="column" v-if="views[3].isShowing">
-
-         <Web />
+          <Subjects/>
 
         </v-col>
-        <v-col class="column" v-if="views[4].isShowing">
+        <v-col class="column">
 
-         <Appearances />
+         <Web/>
+
+        </v-col>
+        <v-col class="column">
+
+         <Appearances/>
 
         </v-col>
       </v-row>
