@@ -36,6 +36,22 @@ export default {
 
 			return smallestSubject;
 		},
+		getSmallestClickedSubject() {
+			let smallestSubject;
+			let smallestString;
+			for (let subject of this.subjects) {
+				for (let string of subject.strings) {
+					if (string.includes(this.string)) {						
+						if (!smallestString || string.length < smallestString.length) {
+							smallestSubject = subject;
+							smallestString = string;
+						}
+					}
+				}
+			}
+
+			return smallestSubject;
+		},
 		hoverSubjects(isHovered) {
 			for (let s of this.subjects) s.isHovered = isHovered;
 		}

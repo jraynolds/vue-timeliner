@@ -5,33 +5,43 @@
 
     <v-content>
       <v-row class="px-6" style="height: 100%;">
-        <v-col class="column" v-if="views[0].isShowing">
+        <transition name="fade">
+          <v-col class="column" v-if="views[0].isShowing">
 
-          <Notes v-on:updateNotes="updateNotes" />
+            <Notes v-on:updateNotes="updateNotes" />
 
-        </v-col>
-        <v-col class="column" v-if="views[1].isShowing">
+          </v-col>
+        </transition>
+        <transition name="fade">
+          <v-col class="column" v-if="views[1].isShowing">
 
-          <Timeline 
-            :story="story" 
-            :subjects="subjects" />
+            <Timeline 
+              :story="story" 
+              :subjects="subjects" />
 
-        </v-col>
-        <v-col class="column" v-if="views[2].isShowing">
+          </v-col>
+        </transition>
+        <transition name="fade">
+          <v-col class="column" v-if="views[2].isShowing">
 
-          <Subjects />
+            <Subjects :subjects="subjects" :story="story" />
 
-        </v-col>
-        <v-col class="column" v-if="views[3].isShowing">
+          </v-col>
+        </transition>
+        <transition name="fade">
+          <v-col class="column" v-if="views[3].isShowing">
 
-         <Web />
+            <Web />
 
-        </v-col>
-        <v-col class="column" v-if="views[4].isShowing">
+          </v-col>
+        </transition>
+        <transition name="fade">
+          <v-col class="column" v-if="views[4].isShowing">
 
-         <Appearances />
+            <Appearances />
 
-        </v-col>
+          </v-col>
+        </transition>
       </v-row>
     </v-content>
   </v-app>
@@ -40,8 +50,8 @@
 <script>
 import Head from './components/Head';
 import Notes from './components/Notes';
-import Timeline from './components/Timeline';
-import Subjects from './components/Subjects';
+import Timeline from './components/Timeline/Timeline';
+import Subjects from './components/Subjects/Subjects';
 import Web from './components/Web';
 import Appearances from './components/Appearances';
 
@@ -81,22 +91,43 @@ export default {
           isShowing: true
         },
       ],
-      subjects: [],
+      subjects: [
+        {
+          strings: [ "Try", "This" ],
+          color: "rgb(255, 0, 0)",
+          isShowing: true
+        },
+        {
+          strings: [ "Now" ],
+          color: "rgb(34, 139, 34)",
+          isShowing: true
+        }
+      ],
       story: {}
     }
   },
   methods: {
     updateNotes(notes) {
+      // eslint-disable-next-line no-console
+      console.log("Updating");
       this.story = parser.notesToStory(notes);
+      parser.addEventsToSubjects(this.subjects, this.story);
     }
   }
 };
 </script>
 
-<style scoped>
+<style>
 .column>div {
   height: 100%;
 
   border: 1px solid black;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

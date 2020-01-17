@@ -20,11 +20,25 @@ export default {
 			story.chapters.push(chapter);
 		}
 		let chapter = {};
-		chapter.title = chapterIndices[chapterIndices.length-1];
+		chapter.title = splitNotes[chapterIndices[chapterIndices.length-1]];
 		chapter.events = splitNotes.slice(chapterIndices[chapterIndices.length-1]+1);
 		story.chapters.push(chapter);
 
     return story;
+  },
+  addEventsToSubjects(subjects, story) {
+    for (let subject of subjects) {
+      subject.events = [];
+      for (let chapter of story.chapters) {
+        for (let event of chapter.events) {
+          for (let string of subject.strings) {
+            if (event.includes(string) && !subject.events.includes(event)) {
+              subject.events.push(event);
+            }
+          }
+        }
+      }
+    }
   },
   containsLowercase(string) {
     return string.match(/[a-z]/);

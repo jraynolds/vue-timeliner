@@ -1,10 +1,11 @@
 <template>
 	<v-app-bar
 		color="black"
+		app
 	>
 		<v-row>
-			<v-col>
-				<h1 style="color: white;">{{ computedTitle }}</h1>
+			<v-col class="pa-0">
+				<h1 class="pl-2" style="color: white;">{{ computedTitle }}</h1>
 			</v-col>
 			<v-spacer/>
 			<div class="buttons">
@@ -37,8 +38,7 @@ export default {
 
 <style scoped>
 .buttons {
-	width: 350px;
-	padding-top: 10px;
+	width: 300px;
 	padding-right: 5px;
 	display: flex;
 }

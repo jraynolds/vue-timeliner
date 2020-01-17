@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Event from '@/components/Event.vue'
+import Event from '@/components/Timeline/Event.vue'
 
 export default {
 	props: [ "chapter", "subjects" ],

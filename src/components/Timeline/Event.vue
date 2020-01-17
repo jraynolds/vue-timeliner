@@ -1,7 +1,7 @@
 <template>
 	<div class="event">
 		<span v-for="(word, index) of splitEvent" :key="index">
-			<Subject 
+			<HoverSubject 
 				v-if="isInSubjects(word)" 
 				:string="word" 
 				:subjects="getSubjects(word)"/>
@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import Subject from '@/components/Subject.vue'
+import HoverSubject from '@/components/Timeline/HoverSubject'
 
 export default {
 	props: [ "event", "subjects" ],
 	components: {
-		Subject
+		HoverSubject
 	},
 	computed: {
 		splitEvent() {
@@ -62,5 +62,6 @@ export default {
 
 .event:nth-child(odd) {
 	margin-left: auto;
+	text-align: right;
 }
 </style>

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Chapter from "@/components/Chapter.vue"
+import Chapter from "@/components/Timeline/Chapter.vue"
 
 export default {
 	props: [ "story", "userSubjects" ],
@@ -91,5 +91,6 @@ export default {
 <style lang="scss" scoped>
 #timeline {
     display: flex;
+		background-color: black;
 }
 </style>
