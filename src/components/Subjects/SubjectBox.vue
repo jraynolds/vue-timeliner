@@ -19,17 +19,12 @@
       </v-row>
       <div :style="{color: textColor}">
         <v-row class="ma-0 px-2">
-          <h2
-            :style="{color: textColor}" 
-            v-for="(string, index) of subject.strings" 
-            :key="string" >
-            <span v-if="index != 0">, </span>
-            <span>{{ string }}</span>
-          </h2>
+          <SubjectTitle 
+            :subject="subject"
+            v-on:changeStrings="changeStrings" 
+          />
         </v-row>
-        <ul :class="{ maximized: windowStyle == 'max', minimized: windowStyle == 'min' }">
-          <li v-for="event of subject.events" :key="event">{{ event }}</li>
-        </ul>
+        <SubjectEvents :events="subject.events" :windowStyle="windowStyle" />
       </div>
     </div>
   </transition>
@@ -37,19 +32,25 @@
 
 <script>
 import ColorPicker from '@/components/Subjects/ColorPicker'
+import SubjectTitle from '@/components/Subjects/SubjectTitle'
+import SubjectEvents from '@/components/Subjects/SubjectEvents' 
 
 export default {
   props: [ "subject" ],
   components: {
-    ColorPicker
+    ColorPicker,
+    SubjectTitle,
+    SubjectEvents
   },
 	data() {
 		return {
-			windowStyle: "med" // Can be med, max, min
+      windowStyle: "med" // Can be med, max, min
 		}
   },
   computed: {
     textColor() {
+      // eslint-disable-next-line no-console
+      // console.log(this.subject);
       let lightness = this.getLightness(this.subject.color);
       if (lightness < 0.3) return "rgb(255, 255, 255)";
       return "rgb(0, 0, 0)";
@@ -59,6 +60,9 @@ export default {
     setWindowStyle(style) {
       if (this.windowStyle == style) this.windowStyle = "med";
       else this.windowStyle = style;
+    },
+    changeStrings(string) {
+      this.$emit('changeStrings', this.subject, string);
     },
     RGBtoHSL(rgb) {
       let rgbArr = rgb.match(/\d+/g);
@@ -144,13 +148,5 @@ h2 {
 
 li {
   font-size: small;
-}
-
-.maximized {
-  max-height: 1000px;
-}
-
-.minimized {
-  max-height: 40px;
 }
 </style>

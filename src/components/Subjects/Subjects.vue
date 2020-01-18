@@ -4,7 +4,8 @@
 		<SubjectBox 
 			v-for="(subject, index) of subjects.filter(s => s.isShowing)" 
 			:key="index" 
-			:subject="subject" />
+			:subject="subject" 
+			v-on:changeStrings="changeStrings" />
 	</div>
 </template>
 
@@ -29,6 +30,20 @@ export default {
 			for (let title of titleString.split(",")) subject.strings.push(title.trim());
 			parser.addEventsToSubjects([subject], this.story);
 			this.subjects.push(subject);
+		},
+		changeStrings(subject, newString) {
+			subject.strings = [];
+
+			for (let string of newString.split(",")) subject.strings.push(string.trim());
+
+			for (let otherSub of this.subjects.filter(sub => sub != subject)) {
+				otherSub.strings = otherSub.strings.filter(s => !subject.strings.includes(s));
+				if (otherSub.strings.length == 0) {
+					this.subjects.splice(this.subjects.indexOf(otherSub), 1)
+				}
+			}
+
+			parser.addEventsToSubjects(this.subjects, this.story);
 		}
 	}
 }

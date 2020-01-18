@@ -28,7 +28,7 @@ export default {
   },
   addEventsToSubjects(subjects, story) {
     for (let subject of subjects) {
-      subject.events = [];
+      subject.events.length = 0;
       for (let chapter of story.chapters) {
         for (let event of chapter.events) {
           for (let string of subject.strings) {

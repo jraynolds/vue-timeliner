@@ -95,12 +95,14 @@ export default {
         {
           strings: [ "Try", "This" ],
           color: "rgb(255, 0, 0)",
-          isShowing: true
+          isShowing: true,
+          events: []
         },
         {
           strings: [ "Now" ],
           color: "rgb(34, 139, 34)",
-          isShowing: true
+          isShowing: true,
+          events: []
         }
       ],
       story: {}
