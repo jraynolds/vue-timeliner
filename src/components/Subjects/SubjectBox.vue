@@ -24,7 +24,7 @@
             v-on:changeStrings="changeStrings" 
           />
         </v-row>
-        <SubjectEvents :events="subject.events" :windowStyle="windowStyle" />
+        <SubjectEvents :events="getEvents" :windowStyle="windowStyle" />
       </div>
     </div>
   </transition>
@@ -36,7 +36,7 @@ import SubjectTitle from '@/components/Subjects/SubjectTitle'
 import SubjectEvents from '@/components/Subjects/SubjectEvents' 
 
 export default {
-  props: [ "subject" ],
+  props: [ "subject", "story" ],
   components: {
     ColorPicker,
     SubjectTitle,
@@ -49,11 +49,20 @@ export default {
   },
   computed: {
     textColor() {
-      // eslint-disable-next-line no-console
-      // console.log(this.subject);
       let lightness = this.getLightness(this.subject.color);
       if (lightness < 0.3) return "rgb(255, 255, 255)";
       return "rgb(0, 0, 0)";
+    },
+    getEvents() {
+      let events = [];
+      for (let chapter of this.story.chapters) {
+        for (let event of chapter.events) {
+          for (let string of this.subject.strings) {
+            if (event.includes(string) && !events.includes(event)) events.push(event);
+          }
+        }
+      }
+      return events;
     }
   },
   methods: {

@@ -6,26 +6,7 @@
 
 <script>
 export default {
-  props: [ "events", "windowStyle" ],
-  // data() {
-  //   return {
-  //     events: this.subject.events
-  //   }
-  // }
-  // computed: {
-  //   events() {
-  //     return this.subject.events;
-  //   }
-  // },
-  watch: {
-    events: {
-      deep: true,
-      handler() {
-        // eslint-disable-next-line no-console
-        console.log("Watching!");
-      }
-    }
-  }
+  props: [ "events", "windowStyle" ]
 }
 </script>
 

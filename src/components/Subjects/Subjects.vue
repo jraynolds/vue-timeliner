@@ -5,6 +5,7 @@
 			v-for="(subject, index) of subjects.filter(s => s.isShowing)" 
 			:key="index" 
 			:subject="subject" 
+			:story="story"
 			v-on:changeStrings="changeStrings" />
 	</div>
 </template>
@@ -12,8 +13,6 @@
 <script>
 import SubjectBox from '@/components/Subjects/SubjectBox'
 import SubjectAdder from '@/components/Subjects/SubjectAdder'
-
-import parser from '@/assets/scripts/storyParsing.js'
 
 export default {
 	props: [ "subjects", "story" ],
@@ -28,7 +27,9 @@ export default {
 			subject.strings = [];
 			subject.isShowing = true;
 			for (let title of titleString.split(",")) subject.strings.push(title.trim());
-			parser.addEventsToSubjects([subject], this.story);
+
+			this.removeStringsFromSubjects(subject.strings);
+
 			this.subjects.push(subject);
 		},
 		changeStrings(subject, newString) {
@@ -36,14 +37,15 @@ export default {
 
 			for (let string of newString.split(",")) subject.strings.push(string.trim());
 
-			for (let otherSub of this.subjects.filter(sub => sub != subject)) {
-				otherSub.strings = otherSub.strings.filter(s => !subject.strings.includes(s));
-				if (otherSub.strings.length == 0) {
-					this.subjects.splice(this.subjects.indexOf(otherSub), 1)
+			this.removeStringsFromSubjects(subject.strings, subject);
+		},
+		removeStringsFromSubjects(strings, excludeSubject={}) {
+			for (let subject of this.subjects.filter(sub => sub != excludeSubject)) {
+				subject.strings = subject.strings.filter(s => !strings.includes(s));
+				if (subject.strings.length == 0) {
+					this.subjects.splice(this.subjects.indexOf(subject), 1)
 				}
 			}
-
-			parser.addEventsToSubjects(this.subjects, this.story);
 		}
 	}
 }

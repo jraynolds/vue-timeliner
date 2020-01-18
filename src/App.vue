@@ -24,7 +24,9 @@
         <transition name="fade">
           <v-col class="column" v-if="views[2].isShowing">
 
-            <Subjects :subjects="subjects" :story="story" />
+            <Subjects 
+              :subjects="subjects" 
+              :story="story" />
 
           </v-col>
         </transition>
@@ -95,25 +97,26 @@ export default {
         {
           strings: [ "Try", "This" ],
           color: "rgb(255, 0, 0)",
-          isShowing: true,
-          events: []
+          isShowing: true
         },
         {
           strings: [ "Now" ],
           color: "rgb(34, 139, 34)",
-          isShowing: true,
-          events: []
+          isShowing: true
         }
       ],
-      story: {}
+      story: {
+        chapters: [],
+        title: ""
+      }
     }
   },
   methods: {
     updateNotes(notes) {
       // eslint-disable-next-line no-console
       console.log("Updating");
-      this.story = parser.notesToStory(notes);
-      parser.addEventsToSubjects(this.subjects, this.story);
+      this.story = parser.getStoryFromNotes(notes);
+      parser.addSubjectsFromStory(this.story, this.subjects);
     }
   }
 };
