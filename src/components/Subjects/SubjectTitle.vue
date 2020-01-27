@@ -7,6 +7,7 @@
     <v-text-field class="mt-n2" style="font-size: 1.3em;"
       v-model="titleStrings"
       hide-details=true
+      color="unset"
     />
   </form>
 </template>
@@ -28,9 +29,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .v-application .primary--text {
-  color: black !important;
+  /* color: black !important; */
   caret-color: black !important;
+}
+
+.theme--light.v-input input, .theme--light.v-input {
+  color: inherit;
 }
 </style>

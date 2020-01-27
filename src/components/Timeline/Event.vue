@@ -1,17 +1,18 @@
 <template>
 	<div class="event">
-		<span v-for="(word, index) of splitEvent" :key="index">
+		<span v-for="(object, index) of getIndices" :key="index">
 			<HoverSubject 
-				v-if="isInSubjects(word)" 
-				:string="word" 
-				:subjects="getSubjects(word)"/>
-			<span v-else>{{word}}</span>
+				v-if="object.subjects.length > 0" 
+				:string="object.string" 
+				:subjects="object.subjects"/>
+			<span v-else>{{object.string}}</span>
 		</span>
 	</div>
 </template>
 
 <script>
 import HoverSubject from '@/components/Timeline/HoverSubject'
+import parser from '@/assets/scripts/storyParsing.js'
 
 export default {
 	props: [ "event", "subjects" ],
@@ -19,33 +20,10 @@ export default {
 		HoverSubject
 	},
 	computed: {
-		splitEvent() {
-			return this.event.split(/\b/);
-		}
-	},
-	methods: {
-		isInSubjects(word) {
-			if (word == " ") return false;
-			for (let s of this.subjects) {
-				for (let string of s.strings) {
-					if (string.includes(word)) {
-						return true;
-					}
-				}
-			}
-			return false;
-		},
-		getSubjects(word) {
-			let subjects = [];
-			for (let s of this.subjects) {
-				for (let string of s.strings) {
-					if (string.includes(word)) {
-						subjects.push(s);
-						break;
-					}
-				}
-			}
-			return subjects;
+		getIndices() {
+			let indices = parser.getSubjectsAtIndices(this.subjects, this.event);
+
+			return indices;
 		}
 	}
 }

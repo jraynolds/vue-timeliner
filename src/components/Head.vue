@@ -3,11 +3,10 @@
 		color="black"
 		app
 	>
-		<v-row>
-			<v-col class="pa-0">
+		<v-row id="headerRow">
+			<v-col id="title" class="pa-0">
 				<h1 class="pl-2" style="color: white;">{{ computedTitle }}</h1>
 			</v-col>
-			<v-spacer/>
 			<div class="buttons">
 					<ToggleButton :view="views[0]"/>
 					<ToggleButton :view="views[1]"/>
@@ -41,5 +40,9 @@ export default {
 	width: 300px;
 	padding-right: 5px;
 	display: flex;
+}
+
+#headerRow, #title {
+	height: 100%;
 }
 </style>

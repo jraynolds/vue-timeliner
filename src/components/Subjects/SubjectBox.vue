@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
     <div class="subjectBox pb-2"
-      :style="{ backgroundColor: subject.color}">
+      :style="{ backgroundColor: subject.color }">
       <v-row class="ma-0">
         <div class="pa-1 pl-1 pr-0" style="width: 28px;">
           <ColorPicker :subject="subject" style="height: 24px;"/>
@@ -49,9 +49,9 @@ export default {
   },
   computed: {
     textColor() {
-      let lightness = this.getLightness(this.subject.color);
-      if (lightness < 0.3) return "rgb(255, 255, 255)";
-      return "rgb(0, 0, 0)";
+      let lightness = parseInt(this.subject.color.match(/\d+/g)[2]);
+      if (lightness < 30) return "white";
+      return "black";
     },
     getEvents() {
       let events = [];
@@ -72,48 +72,6 @@ export default {
     },
     changeStrings(string) {
       this.$emit('changeStrings', this.subject, string);
-    },
-    RGBtoHSL(rgb) {
-      let rgbArr = rgb.match(/\d+/g);
-
-      let r = rgbArr[0] / 255;
-      let g = rgbArr[1] / 255;
-      let b = rgbArr[2] / 255;
-
-      let cmin = Math.min(r, g, b);
-      let cmax = Math.max(r, g, b);
-      let delta = cmax - cmin;
-
-      let h = 0;
-      let s = 0;
-      let l = 0;
-
-      if (delta == 0) h = 0;
-      else if (cmax == r) h = ((g - b) / delta) % 6;
-      else if (cmax == g) h = ((b - r) / delta) + 2;
-      else h = ((r - g) / delta) + 4;
-      h = Math.round(h * 60);
-      if (h < 0) h += 360;
-
-      s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * 1 - 1));
-      s = +(s * 100).toFixed(1);
-
-      l = (cmax + cmin) / 2;
-      l = +(l * 100) .toFixed(1);
-
-      return `hsl(${h},${s}%,${l}%)`
-    },
-    getLightness(rgb) {
-      let rgbArr = rgb.match(/\d+/g);
-
-      let r = rgbArr[0] / 255;
-      let g = rgbArr[1] / 255;
-      let b = rgbArr[2] / 255;
-
-      let cmin = Math.min(r, g, b);
-      let cmax = Math.max(r, g, b);
-
-      return (cmax + cmin) / 2;
     }
   }
 }

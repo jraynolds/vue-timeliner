@@ -14,6 +14,8 @@
 import SubjectBox from '@/components/Subjects/SubjectBox'
 import SubjectAdder from '@/components/Subjects/SubjectAdder'
 
+import parser from '@/assets/scripts/storyParsing.js'
+
 export default {
 	props: [ "subjects", "story" ],
 	components: {
@@ -23,7 +25,7 @@ export default {
 	methods: {
 		addSubject(titleString) {
 			let subject = {};
-			subject.color = "#" + (Math.random()*0xFFFFFF<<0).toString(16);
+			subject.color = parser.randomColor();
 			subject.strings = [];
 			subject.isShowing = true;
 			for (let title of titleString.split(",")) subject.strings.push(title.trim());

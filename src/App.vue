@@ -86,23 +86,25 @@ export default {
         },
         {
           title: "Web",
-          isShowing: true
+          isShowing: false
         },
         {
           title: "Appearances",
-          isShowing: true
+          isShowing: false
         },
       ],
       subjects: [
         {
           strings: [ "Try", "This" ],
           color: "rgb(255, 0, 0)",
-          isShowing: true
+          isShowing: true,
+          isHovered: false
         },
         {
           strings: [ "Now" ],
           color: "rgb(34, 139, 34)",
-          isShowing: true
+          isShowing: true,
+          isHovered: false
         }
       ],
       story: {

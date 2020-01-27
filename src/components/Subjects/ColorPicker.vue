@@ -2,7 +2,7 @@
   <Verte 
     v-model="subject.color" 
     picker="square" 
-    model="rgb" 
+    model="hsl" 
     style="border: 2px dashed black;" />
 </template>
 
@@ -14,12 +14,7 @@ export default {
   components: {
     Verte
   },
-  props: [ "subject" ],
-  data() {
-    return {
-
-    }
-  }
+  props: [ "subject" ]
 }
 </script>
 

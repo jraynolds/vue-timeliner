@@ -35,13 +35,22 @@ export default {
         for (let word of words) {
           if (!strings.includes(word)) {
             let subject = {};
-            subject.strings = word;
-            subject.color = "#" + (Math.random()*0xFFFFFF<<0).toString(16);
+            subject.strings = [word];
+            subject.color = this.randomColor();
             subject.isShowing = false;
+            subject.isHovered = false;
+
+            subjects.push(subject);
           }
         }
       }
     }
+  },
+  randomColor(minSaturation = 50, minLightness = 50) {
+    return `hsl(${this.rand(1, 360)},${this.rand(minSaturation, 100)}%,${this.rand(minLightness, 100)}%)`;
+  },
+  rand(min, max) {
+    return min + Math.random() * (max - min);
   },
   getStringsFromSubjects(subjects) {
     let strings = [];
@@ -78,6 +87,46 @@ export default {
     }
 
     return propers;
+  },
+  getSubjectsAtIndices(subjects, fullstring) {
+    let includedSubjects = [];
+    for (let subject of subjects) {
+      for (let string of fullstring) {
+        if (fullstring.includes(string)) {
+          includedSubjects.push(subject);
+          continue;
+        }
+      }
+    }
+
+    let split = fullstring.split(/\b/);
+    let indices = [];
+    for (let s of split) {
+      let obj = {};
+      obj.string = s;
+      obj.subjects = [];
+      indices.push(obj);
+    }
+
+    for (let i=0; i<split.length; i++) {
+      for (let subject of includedSubjects) {
+        for (let string of subject.strings) {
+          let splitString = string.split(/\b/);
+          if (split[i] == splitString[0] && !indices[i].subjects.includes(subject)) { 
+            // We've found a match.
+            // Does it follow the pattern we want, if we look ahead?
+            if (i + splitString.length - 1 > split.length) continue;
+            if (split.slice(i, i + splitString.length).join("") == string) {
+              for (let z=0; z<splitString.length; z++) {
+                indices[i+z].subjects.push(subject);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    return indices;
   },
   containsLowercase(string) {
     return string.match(/[a-z]/);
