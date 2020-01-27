@@ -29,5 +29,6 @@ export default {
 	margin: 10px;
 	font-style: italic;
 	font-size: larger;
+	text-align: center;
 }
 </style>

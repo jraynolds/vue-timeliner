@@ -24,11 +24,19 @@ export default {
 	},
 	methods: {
 		addSubject(titleString) {
+			let strings = [];
+			for (let title of titleString.split(",")) strings.push(title.trim());
+			for (let subject of this.subjects) {
+				if (subject.strings.every( e => strings.includes(e))) {
+					subject.isShowing = true;
+					return;
+				}
+			}
+
 			let subject = {};
 			subject.color = parser.randomColor();
-			subject.strings = [];
+			subject.strings = strings;
 			subject.isShowing = true;
-			for (let title of titleString.split(",")) subject.strings.push(title.trim());
 
 			this.removeStringsFromSubjects(subject.strings);
 
@@ -40,6 +48,8 @@ export default {
 			for (let string of newString.split(",")) subject.strings.push(string.trim());
 
 			this.removeStringsFromSubjects(subject.strings, subject);
+
+			parser.addSubjectsFromStory(this.story, this.subjects);
 		},
 		removeStringsFromSubjects(strings, excludeSubject={}) {
 			for (let subject of this.subjects.filter(sub => sub != excludeSubject)) {

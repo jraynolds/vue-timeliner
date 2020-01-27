@@ -14,10 +14,10 @@
 
 <script>
 export default {
-  props: [ "subject" ],
-  data() {
-    return {
-      titleStrings: this.subject.strings.join(", ")
+  props: [ "strings" ],
+  computed: {
+    titleStrings() {
+      return this.strings.join(", ");
     }
   },
   methods: {

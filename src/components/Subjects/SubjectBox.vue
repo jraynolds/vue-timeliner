@@ -20,7 +20,7 @@
       <div :style="{color: textColor}">
         <v-row class="ma-0 px-2">
           <SubjectTitle 
-            :subject="subject"
+            :strings="subject.strings"
             v-on:changeStrings="changeStrings" 
           />
         </v-row>

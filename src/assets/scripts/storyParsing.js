@@ -47,7 +47,7 @@ export default {
     }
   },
   randomColor(minSaturation = 50, minLightness = 50) {
-    return `hsl(${this.rand(1, 360)},${this.rand(minSaturation, 100)}%,${this.rand(minLightness, 100)}%)`;
+    return `hsl(${this.rand(1, 360)},${this.rand(minSaturation, 100)}%,${this.rand(minLightness, 80)}%)`;
   },
   rand(min, max) {
     return min + Math.random() * (max - min);
