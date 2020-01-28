@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import ToggleButton from "@/components/ToggleButton.vue"
+import ToggleButton from "@/components/Head/ToggleButton.vue"
 
 export default {
     props: [ "views", "story" ],

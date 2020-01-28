@@ -3,9 +3,12 @@
     ref="form"
     @submit="changeStrings"
     onSubmit="return false;"
+    style="width: auto;"
   >
-    <v-text-field class="mt-n2" style="font-size: 1.3em;"
-      v-model="titleStrings"
+    <v-text-field 
+      class="mt-n2" 
+      style="font-size: 1.3em;"
+      v-model="titleText"
       hide-details=true
       color="unset"
     />
@@ -15,6 +18,11 @@
 <script>
 export default {
   props: [ "strings" ],
+  data() {
+    return {
+      titleText: this.strings.join(", ")
+    }
+  },
   computed: {
     titleStrings() {
       return this.strings.join(", ");

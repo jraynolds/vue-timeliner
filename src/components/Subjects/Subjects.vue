@@ -66,7 +66,9 @@ export default {
 <style scoped>
 #subjects {
 	background-color: black;
-	
+	overflow-y: auto;
+	overflow-x: hidden;
+
 	display: flex;
 	flex-direction: column;
 	padding: 5px;

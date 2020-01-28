@@ -40,6 +40,9 @@ export default {
 
 .event:nth-child(odd) {
 	margin-left: auto;
+}
+
+.event:nth-child(even) {
 	text-align: right;
 }
 </style>

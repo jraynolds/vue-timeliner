@@ -4,7 +4,7 @@
     <Head :views="views" />
 
     <v-content>
-      <v-row class="px-6" style="height: 100%;">
+      <v-row id="main" class="px-6">
         <transition name="fade">
           <v-col class="column" v-if="views[0].isShowing">
 
@@ -24,9 +24,9 @@
         <transition name="fade">
           <v-col class="column" v-if="views[2].isShowing">
 
-            <Subjects 
-              :subjects="subjects" 
-              :story="story" />
+            <Subjects  
+              :story="story" 
+              :subjects="subjects"/>
 
           </v-col>
         </transition>
@@ -40,7 +40,9 @@
         <transition name="fade">
           <v-col class="column" v-if="views[4].isShowing">
 
-            <Appearances />
+            <Appearances 
+              :story="story"
+              :subjects="subjects" />
 
           </v-col>
         </transition>
@@ -50,12 +52,12 @@
 </template>
 
 <script>
-import Head from './components/Head';
+import Head from './components/Head/Head';
 import Notes from './components/Notes';
 import Timeline from './components/Timeline/Timeline';
 import Subjects from './components/Subjects/Subjects';
 import Web from './components/Web';
-import Appearances from './components/Appearances';
+import Appearances from './components/Appearances/Appearances';
 
 import parser from './assets/scripts/storyParsing'
 
@@ -78,11 +80,11 @@ export default {
         },
         {
           title: "Timeline",
-          isShowing: true
+          isShowing: false
         },
         {
           title: "Subjects",
-          isShowing: true
+          isShowing: false
         },
         {
           title: "Web",
@@ -90,7 +92,7 @@ export default {
         },
         {
           title: "Appearances",
-          isShowing: false
+          isShowing: true
         },
       ],
       subjects: [
@@ -103,7 +105,7 @@ export default {
         {
           strings: [ "Now" ],
           color: "rgb(34, 139, 34)",
-          isShowing: true,
+          isShowing: false,
           isHovered: false
         }
       ],
@@ -125,16 +127,32 @@ export default {
 </script>
 
 <style>
+.v-content {
+  height: 100vh;
+}
+
+#main {
+  height: 100%;
+}
+
+.column {
+  height: 100%;
+
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
 .column>div {
   height: 100%;
 
   border: 1px solid black;
+  box-sizing: border-box;
 }
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-enter, .fade-leave-to {
   opacity: 0;
 }
 </style>
