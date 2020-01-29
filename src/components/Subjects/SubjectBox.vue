@@ -82,7 +82,7 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 
   border-radius: 10px;
   border: 2px white dashed;

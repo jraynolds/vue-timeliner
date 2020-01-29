@@ -1,9 +1,13 @@
 <template>
   <v-app>
     
-    <Head :views="views" />
+    <Head :title="story.title" :views="views" />
 
     <v-content>
+      <div id="spacer" style="visibility: hidden; display: flex; flex-wrap: wrap;">
+        <div style="width: 400px; height: 58px;"></div>
+        <div style="width: 300px; height: 58px;" />
+      </div>
       <v-row id="main" class="px-6">
         <transition name="fade">
           <v-col class="column" v-if="views[0].isShowing">
@@ -80,11 +84,11 @@ export default {
         },
         {
           title: "Timeline",
-          isShowing: false
+          isShowing: true
         },
         {
           title: "Subjects",
-          isShowing: false
+          isShowing: true
         },
         {
           title: "Web",
@@ -97,15 +101,15 @@ export default {
       ],
       subjects: [
         {
-          strings: [ "Try", "This" ],
+          strings: [ "Click" ],
           color: "rgb(255, 0, 0)",
           isShowing: true,
           isHovered: false
         },
         {
-          strings: [ "Now" ],
+          strings: [ "Now", "Try" ],
           color: "rgb(34, 139, 34)",
-          isShowing: false,
+          isShowing: true,
           isHovered: false
         }
       ],
@@ -117,8 +121,6 @@ export default {
   },
   methods: {
     updateNotes(notes) {
-      // eslint-disable-next-line no-console
-      console.log("Updating");
       this.story = parser.getStoryFromNotes(notes);
       parser.addSubjectsFromStory(this.story, this.subjects);
     }
@@ -132,7 +134,7 @@ export default {
 }
 
 #main {
-  height: 100%;
+  height: calc(100% - 58px);
 }
 
 .column {
@@ -140,6 +142,8 @@ export default {
 
   overflow-y: auto;
   box-sizing: border-box;
+
+  min-width: 300px;
 }
 
 .column>div {

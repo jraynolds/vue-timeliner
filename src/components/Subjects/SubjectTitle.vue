@@ -23,15 +23,10 @@ export default {
       titleText: this.strings.join(", ")
     }
   },
-  computed: {
-    titleStrings() {
-      return this.strings.join(", ");
-    }
-  },
   methods: {
     changeStrings() {
       document.activeElement.blur();
-      this.$emit('changeStrings', this.titleStrings);
+      this.$emit('changeStrings', this.titleText);
     }
   }
 }

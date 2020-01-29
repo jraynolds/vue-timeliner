@@ -44,12 +44,20 @@ export default {
 		},
 		changeStrings(subject, newString) {
 			subject.strings = [];
+			// eslint-disable-next-line no-console
+			console.log(newString);
 
 			for (let string of newString.split(",")) subject.strings.push(string.trim());
+			// eslint-disable-next-line no-console
+			console.log(subject);
 
 			this.removeStringsFromSubjects(subject.strings, subject);
+			// eslint-disable-next-line no-console
+			console.log(this.subjects);
 
 			parser.addSubjectsFromStory(this.story, this.subjects);
+			// eslint-disable-next-line no-console
+			console.log(this.subjects);
 		},
 		removeStringsFromSubjects(strings, excludeSubject={}) {
 			for (let subject of this.subjects.filter(sub => sub != excludeSubject)) {

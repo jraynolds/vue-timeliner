@@ -4,6 +4,7 @@
       v-for="(square, index) of squares" 
       :key="index"
       :subject="subject"
+      :title="subject.strings.join(', ')"
       :style="{ gridRowStart: square.start+1, gridRowEnd: square.end+1 }"  />
   </div>
 </template>
