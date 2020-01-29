@@ -1,6 +1,5 @@
 <template>
-  <div class="square" 
-    :class="{ hovering: isHovered }"
+  <div :class="{ hovering: isHovered }"
     :style="{ gridRowStart: start, gridRowEnd: end, backgroundColor: subject.color }"
     @mouseenter="subject.isHovered = true"
     @mouseleave="subject.isHovered = false" />
@@ -18,12 +17,8 @@ export default {
 }
 </script>
 
-<style>
-.square {
-  transition: .5s ease-in-out all;
-}
-
+<style scoped>
 .hovering {
-  transform: scale(1.2);
+  transform: scaleX(3.0);
 }
 </style>

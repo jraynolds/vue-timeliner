@@ -1,6 +1,7 @@
 <template>
   <div class="subjectColumn" :class="{ hidden: isHidden }">
-    <SubjectSquare v-for="(square, index) of squares" 
+    <SubjectSquare class="square" 
+      v-for="(square, index) of squares" 
       :key="index"
       :subject="subject"
       :style="{ gridRowStart: square.start+1, gridRowEnd: square.end+1 }"  />
@@ -52,11 +53,11 @@ export default {
 }
 </script>
 
-<style>
-.subjectColumn {
-  display: grid;
-  grid-row-gap: 10px;
+<style scoped>
+.square {
+  margin-top: 8px;
+  margin-bottom: 8px;
 
-  width: 25%;
+  transition: .5s ease-in-out all;
 }
 </style>

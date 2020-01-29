@@ -63,7 +63,17 @@ export default {
 
 	grid-row-gap: 10px;
 	grid-column-gap: 10px;
-
+	flex-grow: 1;
+	align-items: center;
 	justify-items: center;
 }
+
+.subjectColumn {
+  display: grid;
+  grid-row-gap: 10px;
+
+  height: 100%;
+  width: 25%;
+}
+
 </style>

@@ -134,6 +134,12 @@ export default {
 	height: 100%;
 }
 
+#barLayer > div {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
 #arrowLayer {
 	z-index: 0;
 }
