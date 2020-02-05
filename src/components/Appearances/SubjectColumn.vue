@@ -5,7 +5,8 @@
       :key="index"
       :subject="subject"
       :title="subject.strings.join(', ')"
-      :style="{ gridRowStart: square.start+1, gridRowEnd: square.end+1 }"  />
+      :start="square.start + 1"
+      :end="square.end + 1" />
   </div>
 </template>
 
@@ -36,7 +37,7 @@ export default {
           let j;
           for (j=1; j<appearsIn.length; j++) {
             if (!appearsIn[i + j]) {
-              j--;
+              // j--;
               break;
             }
           } // j + i is the next index the subject doesn't appear at

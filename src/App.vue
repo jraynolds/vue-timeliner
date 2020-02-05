@@ -84,11 +84,11 @@ export default {
         },
         {
           title: "Timeline",
-          isShowing: true
+          isShowing: false
         },
         {
           title: "Subjects",
-          isShowing: true
+          isShowing: false
         },
         {
           title: "Web",

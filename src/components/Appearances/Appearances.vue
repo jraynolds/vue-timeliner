@@ -16,8 +16,6 @@ import TitleGrid from '@/components/Appearances/TitleGrid'
 import EventGrid from '@/components/Appearances/EventGrid'
 import ArrowBG from '@/components/General/ArrowBG'
 
-// import $ from 'jquery'
-
 export default {
 	props: [ "subjects", "story" ],
 	data() {
@@ -51,68 +49,6 @@ export default {
 			let numEvents = chapter.events.length;
 			return Math.floor(numEvents) + 1;
 		}
-	// 	setup(sketch) {
-	// 		sketch.resizeCanvas(this.width, this.height);
-	// 	},
-	// 	draw(sketch) {
-	// 		sketch.background("black");
-	// 		this.drawArrow(sketch);
-	// 		this.drawChapters(sketch);
-	// 		sketch.noLoop();
-	// 	},
-	// 	drawArrow(sketch) {
-	// 		sketch.push();
-	// 		sketch.strokeWeight(2);
-	// 		sketch.stroke(255);
-	// 		// Shaft
-	// 		sketch.line(this.width/2, 20, this.width/2, this.height - 20);
-	// 		// Fletching
-	// 		for (let i=0; i<3; i++) {
-	// 			sketch.line(this.width/2, 40 + (i * 10), this.width/2 - 20, 20 + (i * 10));
-	// 			sketch.line(this.width/2, 40 + (i * 10), this.width/2 + 20, 20 + (i * 10));
-	// 		}
-	// 		// Tip
-	// 		sketch.line(this.width/2, this.height - 20, this.width/2 - 20, this.height - 40);
-	// 		sketch.line(this.width/2, this.height - 20, this.width/2 + 20, this.height - 40);
-	// 		sketch.pop();
-	// 	},
-	// 	drawChapters(sketch) {
-	// 		sketch.push();
-	// 		sketch.stroke(255);
-	// 		sketch.fill(255);
-			
-	// 		let availableSpace = this.height - 80 - 80;
-
-	// 		let numSpaces = 0;
-	// 		for (let chapter of this.story.chapters) {
-	// 			numSpaces++;
-	// 			numSpaces += chapter.events.length;
-	// 		}
-	// 		numSpaces--;
-	// 		let individualSpace = availableSpace / numSpaces;
-
-	// 		let y = 80;
-	// 		for (let chapter of this.story.chapters) {
-	// 			sketch.rect(this.width/2 - 10, y, 20, 5);
-	// 			y += individualSpace;
-	// 			for (let i=0; i<chapter.events.length; i++) {
-	// 				sketch.rect(this.width/2 - 5, y, 10, 2);
-	// 				y += individualSpace;
-	// 			}
-	// 		}
-	// 	},
-	// 	windowresized(sketch) {
-	// 		sketch.resizeCanvas(this.container.offsetWidth, this.container.offsetHeight);
-	// 		this.draw(sketch);
-	// 	}
-	// },
-	// // render(h) {
-	// //     return h(vueP5, {on: this});
-	// // },
-	// mounted() {
-	// 	this.container = $("#appearances")[0];
-	// 	// this.width = this.container.offsetWidth;
-	// 	// this.height = this.container.offsetHeight;
 	}
 }
 </script>
